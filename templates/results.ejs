@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Results</title>
+  <style>
+      .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 80%;
+  padding: 30px;
+}
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 28px 8px 30px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  border-bottom: 1px solid #ededed73;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.container{
+ margin: 20px 260px;
+}
+  </style>
+</head>
+<body>
+    <div class="sidenav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/new">New Poll</a>
+        <a href="/comp">Completed Poll</a>
+        <a href="/results">Poll Results</a>
+        <a href="/logout">Logout</a>
+      </div>
+
+    <div class="container">
+      
+    <h1><%-JSON.stringify(title.result1)%></h1>
+    <h1><%-JSON.stringify(title.result2)%></h1>
+    <h1><%-JSON.stringify(title.result3)%></h1>
+    <hr>
+    <% records.forEach(function(data) {%>
+    <div class="card">
+        <p>
+            <h2><%= data.ques.ques %> </h2>
+              (i)  <%= data.ques.opt1 %><br>  
+              (ii) <%= data.ques.opt2 %><br>
+              (iii)  <%= data.ques.opt3 %><br>
+              Published On:-  <%= data.ques.created %><br>      
+          <strong>   Option Chosen:- <%= data.opt %></strong> <br>
+        <strong>   Points :- <%= data.points %>    </strong>
+        </p>
+    </div>
+        <%}) %>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+@media screen and (max-width:1155px) {
+    .new-card{
+      justify-content: unset;
+    }
+   }
+   @media screen and (max-width:999px) {
+    .new-card{
+      justify-content: center;
+    }
+    #week-form{
+     flex: 0 0 80%;
+       max-width: 80%;
+       padding-left: 0px;
+       padding-right: 0px;
+    }
+    .centerBlk{
+      width: 80%;
+    }
+   }
+   @media screen and (max-width:799px) {
+   .logoBlk{
+     width: 51%;
+   }
+   }
+   @media screen and (max-width:699px) {
+   
+     .logoBlk{
+       width: 80%;
+     }
+     #week-form{
+     flex: 0 0 100%;
+       max-width: 100%;
+       padding-left: 15px;
+    }
+    .centerBlk{
+      width: 100%;
+    }
+    .radioWeekBlk{
+      gap: 15px;
+    }
+   }
+   @media screen and (max-width:475px) {
+     .logoBlk {
+       width: 44%;
+   }
+   .logo {
+       height: 24px;
+       width: 191px;
+   }
+   .logoText{
+     font-size: 14px;
+   }
+   #day{
+     font-size: 20px;
+   }
+   .quesMain{
+     font-size: 18px;
+   }
+   .mainLabel{
+     font-size: 14px;
+   }
+   .radioWeekBlk {
+       gap: 8px;
+   }
+   .weekSubmitBtn, .submitBtn{
+     font-size: 11px;
+     width: 128px;
+   }
+   .radioBlk{
+     gap: 20px;
+   }
+   #week-form{
+     padding-right: 10px;
+     padding-left: 10px;
+   }
+   }
+   @media screen and (max-width:375px) {
+     .radioWeekBlk {
+       gap: 5px;
+   }
+   .logoBlk {
+       width: 51%;
+   }
+   }
+   

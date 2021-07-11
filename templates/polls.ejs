@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title><%= title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <style>
+        /* .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  height: 325px;
+} */
+
+.body{
+  font-family: 'Roboto', sans-serif;
+}
+
+.logoBlk{
+  display: flex;
+  justify-content: center;
+  padding-top: 70px;
+  flex-direction: column;
+  
+  width: 32%;
+    margin: 0 auto;
+}
+.logo{
+  height: 54px;
+  width: 432px;
+}
+.logoText{
+  font-weight: 500;
+font-size: 20px;
+line-height: 24px;
+color: #494747;
+}
+#day{
+  font-weight: bold;
+font-size: 30px;
+line-height: 36px;
+text-align: center;
+color: #4F4F4F;
+}
+.hide{
+  display: none;
+}
+
+.centerBlk{
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #D2D2D2;
+box-sizing: border-box;
+box-shadow: 0px 4px 8px rgba(187, 187, 187, 0.25);
+border-radius: 5px;
+align-items: baseline;
+width: 50%;
+padding-right: 30px;
+padding-left: 30px;
+    margin: 0 auto;
+
+}
+
+input[type=radio] {
+  padding: 0.5em;
+  -webkit-appearance: none;
+  background: #E8E8E8;
+}
+
+input[type=radio]:checked {
+  background: #024073;
+  background-size: 9px 9px;
+}
+
+input[type=radio]:focus {
+  outline-color: transparent;
+}
+.centerBlk li{
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+
+}
+.radioBlk{
+  display: flex;
+  flex-direction: row;
+  gap: 125px;
+  align-items: center;
+  justify-content: space-between;
+}
+.mainLabel{
+  font-size: 18px;
+line-height: 22px;
+/* identical to box height */
+font-weight: 400;
+color: #494747;
+}
+.radioButton{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.radioButton .submitBtn{
+  color: #ffffff;
+  background: #024073;
+border-radius: 7px;
+border: none;
+width: 166px;
+height: 40px;
+}
+.weekSubmitBtn{
+  color: #424242;
+  font-size: 19px;
+  font-weight: bold;
+  background: transparent;
+border-radius: 7px;
+border: 1px solid #909090;
+width: 166px;
+height: 40px;
+}
+.radioButton .dateMain{
+  font-weight: 500;
+font-size: 15px;
+line-height: 18px;
+color: #707070;
+}
+.quesMain{
+  text-align: initial;
+  font-weight: 600;
+font-size: 24px;
+line-height: 29px;
+color: #525252;
+}
+#vote-form{
+  position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-bottom: 50px;
+    padding-left: 45px;
+    /* padding: 1.25rem; */
+    flex: 0 0 45%;
+    max-width: 45%;
+    transition: 0.8s;
+}
+.new-card {
+  display: flex;
+    flex-wrap: wrap;
+    align-items:  baseline;
+   justify-content: space-between;
+   margin-left: 15px;
+   margin-right: 15px;
+ margin-bottom: 30px;
+ margin-top: 30px;
+}
+.daysec{
+  margin-bottom: 100px;
+}
+li{
+  list-style: none;
+}
+#week-form{
+  position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-left: 35px;
+    background: #FFFFFF;
+box-shadow: 0px 4px 8px rgba(187, 187, 187, 0.25);
+border-radius: 5px;
+ 
+    /* padding: 1.25rem; */
+    flex: 0 0 45%;
+    max-width: 42%;
+    transition: 0.8s;
+}
+.weekBlk{
+   display: flex;
+   flex-wrap: wrap;
+}
+#week #vote-form{
+  max-width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.radioWeekBlk{
+  gap: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+  </style>
+  <link rel="stylesheet" href="/css/responsive.css">
+  </head>
+<body>
+  <div class="wrapper">
+<div class="logoBlk">
+  <img src="/images/logo.png" alt="logo" class="logo"/>
+  <p class="logoText">What india wants</p>
+</div>
+
+<div class="container">
+  <div class="daysec">
+<h1 id="day" >Poll for the day</h1>
+<span id="day">
+    <form action="/polls" method="POST" id="day-form" >
+    <% for(var i= (records.length-1); i >=0; i--) { %>
+    
+      <!-- <div class="card"> -->
+      <%if (records[i].day == true) { %>
+ <div class="centerBlk">
+   <p class="quesMain" id="qid"><%= records[i].ques %></p>
+   <div class="hide"><input name="id" value="<%= records[i]._id %>"><label></label></div>
+   <div class="radioBlk">
+    <li><label for="muhRadio1" class="mainLabel"><input type="radio" id="opt1" name="opt" value="opt1" required/><%= records[i].opt1 %> </label></li>
+    <li><label for="muhRadio2" class="mainLabel"><input type="radio" id="opt2" name="opt" value="opt2"/> <%= records[i].opt2 %></label></li>
+    <li><label for="muhRadio3" class="mainLabel"><input type="radio" id="opt3" name="opt" value="opt3"/> <%= records[i].opt3 %></label></li>
+   </div>
+   <!-- <input type="submit" id="submit" value="Submit"> -->
+ <div class="radioButton">
+<button class="submitBtn" type="submit" onclick="onClick()">
+     Submit
+   </button>
+   <p class="dateMain">4th May, 2021</p>
+  </div>
+  
+  </div>
+  <% } %>
+  <%} %>
+</form>
+</span>
+  </div>
+  </div>
+
+
+  <div class="container">
+    <div class="daysec">
+<h1 id="day">Poll for the week</h1>
+<!-- <div class=""> -->
+<span id="week">
+  <div class="card new-card">
+    <% for(let i = (records.length-1); i >= 0; i--) { %>
+      <%if (records[i].week == true) { %>
+        
+  <form action="/polls" method="POST" id="week-form" >
+    <div class="week-form">
+    <p class="quesMain" id="qid"><%= records[i].ques %></p>
+    <div class="hide"><input name="id" value="<%= records[i]._id %>"><label></label></div>
+    <div class="radioWeekBlk">
+     <li><label for="muhRadio1" class="mainLabel"><input type="radio" id="opt1" name="opt" value="opt1" required/><%= records[i].opt1 %> </label></li>
+     <li><label for="muhRadio2" class="mainLabel"><input type="radio" id="opt2" name="opt" value="opt2"/> <%= records[i].opt2 %></label></li>
+     <li><label for="muhRadio3" class="mainLabel"><input type="radio" id="opt3" name="opt" value="opt3"/> <%= records[i].opt3 %></label></li>
+    </div>
+<div class="radioButton">
+  <button class="weekSubmitBtn" type="submit" onclick="onClick()">
+       Submit
+     </button>
+     <p class="dateMain">4th May, 2021</p>
+    </div>
+</div>
+</form>
+
+<%} %> 
+<%} %> 
+</div>
+</span>
+</div>
+</div>
+<script>
+  function onClick(){
+    window.alert("Vote Casted")
+  }
+</script>
+</body>
+</html>

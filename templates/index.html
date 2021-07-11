@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Site_Poll</title>
+    <style>
+        .pageWrap{
+            display: flex;
+            align-items: center;
+            min-height: 90vh;
+            justify-content: center;
+        }
+    .container{
+        /* display: flex; */
+        /* flex-direction: column;
+        margin: 20px auto;
+        align-items: center; */
+        max-width: 950px;
+        margin:  0 auto;
+        
+        width: 60%;
+    }
+    form{
+        /* display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 20%; */
+        margin-top: 40px;
+    }
+    input{
+        width: 70%;
+        border: 2px solid #25222230;
+        border-radius: 10px;
+    height: 34px;
+    margin-bottom: 20px;
+    
+    padding-left: 20px;
+    }
+    .inputWrap{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .submitBtn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+    }
+    .btn{
+        width: 50%;
+        border-radius: 20px;
+        height: 44px;
+        background-color: black;
+        color: white;
+        border: none;
+        outline: none;
+    }
+    .btn:hover{
+        background-color: white;
+        color: black;
+        border: 2px solid;
+        cursor: pointer;
+    }
+    .card-login{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      
+        display: flex;
+        flex-direction: row;
+    }
+    .loginWrap{
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 50px;
+    }
+    .bgimg{
+        background: url(https://i.ytimg.com/vi/9Dse4A2m_a8/maxresdefault.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+    }
+    .link-login{
+        text-decoration: none;
+         color: black;
+         text-align: center;
+         display: block;
+    }
+    </style>
+    <script src="/app.js"></script>
+</head>
+<body>
+    <div class="pageWrap">
+    <div class="container">
+        <div class="card-login">
+            <div class="bgimg">
+
+            </div>
+            <div class="loginWrap">
+    <h1 style="text-align: center;">Sign In</h1>
+    <a style="text-align: center;"href="./register" class="link-login" >Don’t have an account yet? Sign Up.</a>
+    <form
+     action="/login" method="POST"
+     id="form">
+        <div class="inputWrap">
+        <input type="email" placeholder="Email Address" name="email" required>
+        <input type="password" placeholder="Password" name="password" required>
+    </div>
+    <div class="submitBtn">
+        <button class="btn" type="submit">Submit</button>
+    </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+body{
+  background-color: #1a233a;
+}
+  .sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  padding-right: 20px;
+  padding-left: 20px;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #272e48;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 15px 10px 15px 16px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  border-bottom: 1px solid #ededed73;
+  color: #818181;
+  display: block;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #154360, #17202A);
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.container{
+ margin: 20px 260px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 51%;
+  margin-top: 20px;
+  border-radius: 30px;
+    /* height: 40px; */
+    padding: 10px 20px;
+    background-color: #AED6F1;
+    color: #154360;
+}
+.card:hover{
+	transform: translateX(10px);
+}
+.head{
+  color: #DC143C;
+}
+
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/new">New Poll</a>
+        <a href="/comp">Completed Poll</a>
+        <a href="/logout">Logout</a>
+      </div>
+      
+    <div class="container">
+    <h1 class="head">Dashboard</h1>
+    <hr>
+    
+    <div class="card">
+      <h4>
+          Users Registered :  <%= info.length %> 
+      </h4>
+    </div>
+
+    <div class="card">
+      <h4>
+          Total Votes : 
+      </h4>
+    </div>
+
+    <div class="card">
+      <h4>
+          Total Polls : <%= records.length %> </div>
+      </h4>
+    </div>
+
+
+  </div>
+  <script>
+
+  </script>
+</body>
+</html>

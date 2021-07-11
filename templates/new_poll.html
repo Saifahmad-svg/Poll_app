@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <style>
+body{
+  background-color: #1a233a;
+}
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  padding-right: 20px;
+  padding-left: 20px;
+  top: 0;
+  left: 0;
+  background-color: #272e48;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+label{
+  font-size: 24px;
+}
+.inputBox{
+  margin-top: 20px;
+  height: 34px;
+  width: 80%;
+  padding-left: 12px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+}
+.sidenav a {
+  padding: 15px 10px 15px 16px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  font-size: 20px;
+  border-bottom: 1px solid #ededed73;
+  color: #818181;
+  display: block;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #154360, #17202A);
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.publish{
+  height: 54px;
+  width: 80%;
+  border-radius: 30px;
+  background-color: #1A5276;
+  color: white;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  transition: background 0.5s;
+}
+.publish:hover{
+	background: #2ECC71;
+}
+.head{
+  color: #DC143C;
+}
+.ques {
+  color: #7FB3D5;
+}
+.opt{
+  color: #CB4335;
+}
+.poll{
+  color: #FCF3CF;
+}
+.container{
+    margin: 20px 260px;
+}
+
+    </style>
+<body>
+    <div class="sidenav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/new">New Poll</a>
+        <a href="/comp">Completed Poll</a>
+        <a href="/logout">Logout</a>
+      </div>
+      
+<div class="container">
+<h1 class="head">New Poll</h1>
+<hr>
+<form action="/new" method="POST">
+  <label for="ques" class="ques"><strong> Question: </strong></label><br>
+  <input type="text" id="ques" name="ques" class="inputBox"><br><br>
+  <label for="opt1" class="opt"><strong>Option 1:</strong></label><br>
+  <input type="text" id="opt1" name="opt1" class="inputBox"><br><br>
+  <label for="opt2" class="opt"><strong>Option 2:</strong></label><br>
+  <input type="text" id="opt2" name="opt2" class="inputBox"><br><br>
+  <label for="opt3" class="opt"><strong>Option 3:</strong></label><br>
+  <input type="text" id="opt3" name="opt3" class="inputBox" ><br><br>
+  
+    <input type="checkbox" id="day" name="day" value=1>
+      <label class="poll" for="date">Poll for the Day</label><br><br>
+      <input type="checkbox" id="week" name="week" value=1>
+      <label class="poll" for="date">Poll for the Week</label>  <br><br>
+      <input type="submit" value="Publish Now" class="publish" onclick="added()">   
+</form> 
+</div>
+<script>
+  function added(){
+    window.alert("Poll added Successfully :-)")
+  }
+</script>
+</body>
+</html>
