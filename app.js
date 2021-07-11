@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const password = '9279537277'
 
 const mongoURL = `mongodb+srv://saif_svg:${password}@cluster0.fwxl9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-
+const host = '0.0.0.0';
 mongoose.connect(mongoURL,{userNewUrlParser:true});
 var db = mongoose.connection;
 const Poll = require("./models/polls");
@@ -222,6 +222,6 @@ app.post('/polls',(req,res)=>{
 });
 
             
-app.listen(port,()=>{
+app.listen(port,host,function(){
     console.log(`App is running on ${port}`);
 })
