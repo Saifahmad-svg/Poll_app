@@ -151,7 +151,7 @@ app.get('/new',authenticateUser,(req,res)=>{
     res.render('new_poll.html');
 })
 
-app.post('/new',authenticateUser,async(req,res)=>{  
+app.post('/new',async(req,res)=>{  
     const ques = new Poll(req.body)
     // console.log(req.body)
     if (ques.day == true){
@@ -181,7 +181,33 @@ app.get('/comp',authenticateUser,(req,res,next)=>{
   })
 });
 
-app.post('/polls',(req,res)=>{
+app.post('/delete',authenticateUser,async(req,res,next)=>{
+  let id = mongoose.Types.ObjectId(req.body.id);
+  let day = Poll.findById(ObjectId(id))
+  .then(doc => {     
+    console.log(doc)
+    // console.log(Object.keys(doc));
+    if (doc.day == true){
+      Poll.find().sort({ $natural: -1 }).findOneAndUpdate(
+        {"day": 0},
+        {"$set": { "day": 1 , "week":0}},
+        function(err,data){
+          if(err) throw err;
+        })
+        }        
+        let del = Poll.findByIdAndDelete(id);
+        del.exec(function(err,data){
+          if(err) throw err
+          ques.exec(function(err,data){
+            if(err) throw err
+            res.render('comp', {title : "Polls", records:data});
+          })
+        })
+  })
+
+});
+
+app.post('/polls',authenticateUser,(req,res)=>{
     let opt = req.body.opt;
     let qids = mongoose.Types.ObjectId(req.body.id);
    const newVote = Poll({

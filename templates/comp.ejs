@@ -15,6 +15,23 @@ body{
   background-color: #82E0AA;
   border-radius: 50px;
 }
+
+.btn {
+    display: inline-block;
+    background-color: #ff523b;
+    color: #fff;
+    border: #ff523b;
+    border-radius: 30px;
+    padding: 8px 30px;
+    margin-top: 20px;
+    transition: background 0.5s;
+}
+.btn:hover{
+  background-color: #272e48;
+}
+.hide{
+  display: none;
+}
 .card:hover{
 	transform: translateX(10px);
 }
@@ -83,12 +100,23 @@ body{
           <div class="opt"> <h4>   1.  <%= data.opt1 %> &#8594; <%= data.ansOpt1 %> <br>
               2.  <%= data.opt2 %> &#8594; <%= data.ansOpt2 %><br>
               3.  <%= data.opt3 %> &#8594; <%= data.ansOpt3 %> <br></h4></div>
+             
           <div class="total">     <strong> Total Votes &#8594; <%= data.ansOpt1 + data.ansOpt2 + data.ansOpt3 %> </strong>  <br></div>
               Published On:-  <%= data.created.toLocaleDateString() %>
-        
+              <form action="/delete" method="POST" id="day-form" >
+                <div class="hide"><input name="id" value="<%= data._id %>"><label></label></div>
+          
+              <button class="btn" type="submit" onclick="onClick()">
+                Delete
+              </button>
+            </form>
     </div>
         <%}) %>
     </div>
-
+<script>
+  function onClick(){
+    window.alert("Poll Deleted Successfully")
+  }
+</script>
 </body>
 </html>
