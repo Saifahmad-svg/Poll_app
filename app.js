@@ -151,13 +151,13 @@ app.get('/new',authenticateUser,(req,res)=>{
     res.render('new_poll.html');
 })
 
-app.post('/new',async(req,res)=>{  
+app.post('/new',authenticateUser,(req,res)=>{  
     const ques = new Poll(req.body)
     // console.log(req.body)
     if (ques.day == true){
       // for(var i= (Poll.length-2); i < Poll.length; i++){
       //   const bom = Poll.findOne[i];
-      //   console.log(bom)
+        // console.log("bom")
        Poll.updateMany(
         {"day":1},
         {"$set": { "day": 0 , "week":1}},
