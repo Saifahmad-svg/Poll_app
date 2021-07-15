@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/poll',{userNewUrlParser:true});
 
 const password = '9279537277'
-
-const mongoURL = `mongodb+srv://saif_svg:${password}@cluster0.fwxl9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const mongoURL = "mongodb://localhost:27017/poll"
+// const mongoURL = `mongodb+srv://saif_svg:${password}@cluster0.fwxl9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 const host = '0.0.0.0';
 mongoose.connect(mongoURL,{userNewUrlParser:true});
 var db = mongoose.connection;
@@ -19,6 +19,7 @@ const cors = require('cors');
 const path = require('path');
 var ques = Poll.find({});
 var user = User.find({});
+var vote = Vote.find({});
 const bcrypt = require('bcrypt');
 let multer = require('multer');
 let upload = multer();
@@ -207,7 +208,20 @@ app.post('/delete',authenticateUser,async(req,res,next)=>{
 
 });
 
-app.post('/polls',authenticateUser,(req,res)=>{
+app.post('/polls',(req,res)=>{
+    
+    req.session.user = {
+      uuid: '12234-2345-2323423'
+  } //THIS SETS AN OBJECT - 'USER'
+  req.session.save(err => {
+      if(err){
+          console.log(err);
+      } else {
+        console.log("saving")
+          res.send(req.session.user) // YOU WILL GET THE UUID IN A JSON FORMAT
+      }
+  }); //THIS SAVES THE SESSION.
+
     let opt = req.body.opt;
     let qids = mongoose.Types.ObjectId(req.body.id);
    const newVote = Poll({
