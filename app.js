@@ -42,19 +42,7 @@ mongoose.set('useFindAndModify', false);
 
 
 //Routing
-app.get('/polls',(req,res)=>{
-      req.body.created_at = new Date();
-      let todayDate = new Date();
-let beforeDate = new Date();
-beforeDate.setDate(beforeDate.getDate() - 7);
-Poll.find({"created":{"$gt":beforeDate, "$lte":todayDate}})
-.exec(function(err,docs){
-    ques.exec(function(err,data){
-    if(err) throw err;
-    res.render('polls', {title : "Polls", records:data, records:docs});
-  })
-})
-});
+
  
 app.get('/login',(req,res)=>{
     res.render('index.html');
@@ -278,13 +266,16 @@ app.post('/polls',(req,res)=>{
       Vote.findOneAndUpdate(
         {session: "More than two times voter"},
         {"$inc": {"voteCount":1}}, 
+        function(err,data){
+          if(err) throw err;
+         })
+       
         Vote.findOneAndUpdate(
           {session: "Unique voter"},
           {"$inc": {"voteCount": -1}},
        function(err,data){
        if(err) throw err;
       })
-      )
     }
 
   ques.exec(function(err,data){
@@ -294,6 +285,21 @@ app.post('/polls',(req,res)=>{
   })
 });
             
+
+app.get('/polls',(req,res)=>{
+  req.session.voteCount = null;
+      req.body.created_at = new Date();
+      let todayDate = new Date();
+let beforeDate = new Date();
+beforeDate.setDate(beforeDate.getDate() - 7);
+Poll.find({"created":{"$gt":beforeDate, "$lte":todayDate}})
+.exec(function(err,docs){
+    ques.exec(function(err,data){
+    if(err) throw err;
+    res.render('polls', {title : "Polls", records:data, records:docs});
+  })
+})
+});
 app.listen(port,function(){
     console.log(`App is running on ${port}`);
 })
