@@ -3,11 +3,11 @@ require("./db/conn");
 const mongoose = require('mongoose');
 //mongoose.connect('mongodb://localhost:27017/poll',{userNewUrlParser:true});
 
-const password = '9279537277'
-const mongoURL = "mongodb://localhost:27017/poll"
+// const password = '9279537277'
+// const mongoURL = "mongodb://localhost:27017/poll"
 // const mongoURL = `mongodb+srv://saif_svg:${password}@cluster0.fwxl9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-const host = '0.0.0.0';
-mongoose.connect(mongoURL,{userNewUrlParser:true});
+// const host = '0.0.0.0';
+// mongoose.connect(mongoURL,{userNewUrlParser:true});
 var db = mongoose.connection;
 const Poll = require("./models/polls");
 const cookieSession = require("cookie-session");
@@ -39,6 +39,7 @@ app.use( express.static("public") );
 app.engine('html', require('ejs').renderFile);
 app.use(cors());
 mongoose.set('useFindAndModify', false);
+
 
 //Routing
 app.get('/polls',(req,res)=>{
@@ -138,12 +139,15 @@ app.get("/logout", authenticateUser, (req, res) => {
 });
 
 app.get('/dashboard',authenticateUser, (req,res)=>{
-  user.exec(function(err,docs){
+  let x = 0;
+  vote.exec(function(err,docs){
     if(err) throw err;
-  ques.exec(function(err,data){
+  ques.exec(function(err,records){
       if(err) throw err;
-  res.render('dashboard',
-  {title : "Completed Polls", records:data, info:docs})
+      records.forEach(function(data) {
+       x += data.ansOpt1 + data.ansOpt2 + data.ansOpt3
+      })
+  res.render('dashboard',{data:x, info:docs})
    })
    })
 })
@@ -207,20 +211,19 @@ app.post('/delete',authenticateUser,async(req,res,next)=>{
   })
 
 });
-
+let voteCount =0
 app.post('/polls',(req,res)=>{
     
-    req.session.user = {
-      uuid: '12234-2345-2323423'
-  } //THIS SETS AN OBJECT - 'USER'
-  req.session.save(err => {
-      if(err){
-          console.log(err);
-      } else {
-        console.log("saving")
-          res.send(req.session.user) // YOU WILL GET THE UUID IN A JSON FORMAT
-      }
-  }); //THIS SAVES THE SESSION.
+  // req.session.voteCount += 1
+  // console.log(req.session.user)
+  // let newsession = new Vote({session})
+  // newsession.save(err => {
+  //     if(err){
+  //         console.log(err);
+  //     } else {
+  //       console.log("saving")
+  //     }
+  // }); //THIS SAVES THE SESSION.
 
     let opt = req.body.opt;
     let qids = mongoose.Types.ObjectId(req.body.id);
@@ -254,14 +257,43 @@ app.post('/polls',(req,res)=>{
      if(err) throw err;
     }
     )}
+    let totalVote;
+    if(!req.session.voteCount){
+      totalVote = req.session.voteCount = 1;
+    }
+    else{
+       totalVote = req.session.voteCount += 1;
+    }
+    console.log(totalVote)
+    if (totalVote==1){
+      Vote.findOneAndUpdate(
+        {session: "Unique voter"},
+        {"$inc": {"voteCount":1}}, 
+       function(err,data){
+       if(err) throw err;
+      }
+      )}
+
+    if (totalVote>2 && totalVote<4){
+      Vote.findOneAndUpdate(
+        {session: "More than two times voter"},
+        {"$inc": {"voteCount":1}}, 
+        Vote.findOneAndUpdate(
+          {session: "Unique voter"},
+          {"$inc": {"voteCount": -1}},
+       function(err,data){
+       if(err) throw err;
+      })
+      )
+    }
+
   ques.exec(function(err,data){
     if(err) throw err;
     // res.send("Vote Casted")
     res.render('polls', {title : "Polls", records:data}); 
   })
 });
-
             
-app.listen(port,host,function(){
+app.listen(port,function(){
     console.log(`App is running on ${port}`);
 })

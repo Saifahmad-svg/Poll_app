@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 
 
 const voteSchema = new mongoose.Schema({
+  session:{
+    type:String,
+    default: "Unique voter"
+  },
   voteCount: { 
-    type: Number, 
-    default: 0
+    type: Number
   }
 });
 

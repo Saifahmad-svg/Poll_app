@@ -72,25 +72,20 @@ body{
     <div class="container">
     <h1 class="head">Dashboard</h1>
     <hr>
-    
     <div class="card">
       <h4>
-          Users Registered :  <%= info.length %> 
+        Total votes casted : <%= data %>
+      </h4>
+    </div>
+    <% info.forEach(function(docs) {%>
+    <div class="card">
+      <h4>
+         <%= docs.session %> :  <%= docs.voteCount %>
       </h4>
     </div>
 
-    <div class="card">
-      <h4>
-          Total Votes : 
-      </h4>
-    </div>
-
-    <div class="card">
-      <h4>
-          Total Polls : <%= records.length %> </div>
-      </h4>
-    </div>
-
+   
+    <%}) %>
 
   </div>
   <script>

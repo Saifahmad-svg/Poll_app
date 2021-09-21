@@ -117,6 +117,10 @@ body{
   function onClick(){
     window.alert("Poll Deleted Successfully")
   }
+  if ( window.history.replaceState ) {
+  let href = "http://127.0.0.1/comp"
+        window.history.replaceState( null, null,href);
+    }
 </script>
 </body>
 </html>

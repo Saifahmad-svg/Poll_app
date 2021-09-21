@@ -69,6 +69,7 @@ input[type=radio] {
   padding: 0.5em;
   -webkit-appearance: none;
   background: #E8E8E8;
+  cursor: pointer;
 }
 
 input[type=radio]:checked {
@@ -113,6 +114,7 @@ border-radius: 7px;
 border: none;
 width: 166px;
 height: 40px;
+cursor: pointer;
 }
 .weekSubmitBtn{
   color: #424242;
@@ -123,6 +125,7 @@ border-radius: 7px;
 border: 1px solid #909090;
 width: 166px;
 height: 40px;
+cursor: pointer;
 }
 .radioButton .dateMain{
   font-weight: 500;
@@ -228,7 +231,7 @@ border-radius: 5px;
 <button class="submitBtn" type="submit" onclick="onClick()">
      Submit
    </button>
-   <p class="dateMain">4th May, 2021</p>
+   <p class="dateMain"><%= records[i].created.toLocaleDateString() %></p>
   </div>
   </div>
   <% } %>
@@ -261,7 +264,7 @@ border-radius: 5px;
   <button class="weekSubmitBtn" type="submit" onclick="onClick()">
        Submit
      </button>
-     <p class="dateMain">4th May, 2021</p>
+     <p class="dateMain"><%= records[i].created.toLocaleDateString() %></p>
     </div>
 </div>
 </form>
@@ -276,6 +279,14 @@ border-radius: 5px;
   function onClick(){
     window.alert("Vote Casted")
   }
+  if ( window.history.replaceState ) {
+  let href = "http://127.0.0.1/polls"
+        window.history.replaceState( null, null,href);
+    }
+    
+    window.onbeforeunload = function() {
+   localStorage.clear();
+}
 </script>
 </body>
 </html>
