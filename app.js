@@ -115,7 +115,7 @@ app.post("/login", async (req, res)=>{
     latestUser
       .save()
       .then(() => {
-        res.send("registered account!");
+        res.render("index.html");
         return;
       })
       .catch((err) => console.log(err));
