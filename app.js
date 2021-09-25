@@ -45,11 +45,11 @@ mongoose.set('useFindAndModify', false);
 
  
 app.get('/login',(req,res)=>{
-    res.render('index.html');
+    res.render('index',{message:''});
 });
 
 app.get('/register',(req,res)=>{
-  res.render('registration.html');
+  res.render('registration',{message:''});
 
 });
 // cookie session
@@ -64,7 +64,7 @@ app.post("/login", async (req, res)=>{
 
   // check for missing filds
   if (!email || !password) {
-    res.send("Please enter all the fields");
+    res.render('index',{message:"Kindly fill all the fields"});
     return;
   }
 
@@ -72,7 +72,7 @@ app.post("/login", async (req, res)=>{
   // const existPassword = await User.findOne({ password });
 
   if (!doesUserExits) {
-    res.send("Invalid username");
+    res.render('index',{message:"Invalid username"});
     return;
   }
 
@@ -82,7 +82,7 @@ app.post("/login", async (req, res)=>{
   );
 
   if (!doesPasswordMatch) {
-    res.send("Password incorrect");
+    res.render('index',{message:"Password incorrect"});
     return;
   }
   // else he\s logged in
@@ -97,14 +97,14 @@ app.post("/login", async (req, res)=>{
 
     // check for missing filds
     if (!email || !password) {
-      res.send("Please enter all the fields");
+      res.render('registration',{message:"Kindly fill all the fields"});
       return;
     }
 
     const doesUserExitsAlreay = await User.findOne({ email });
 
     if (doesUserExitsAlreay) {
-      res.send("A user with that email already exits please try another one!");
+      res.render('registration',{message:"A user with that email already exits please try another one!"});
       return;
     }
 
@@ -115,7 +115,7 @@ app.post("/login", async (req, res)=>{
     latestUser
       .save()
       .then(() => {
-        res.render("index.html");
+        res.render("index",{message:"Registered Successfully"});
         return;
       })
       .catch((err) => console.log(err));
@@ -135,7 +135,7 @@ app.get('/dashboard',authenticateUser, (req,res)=>{
       records.forEach(function(data) {
        x += data.ansOpt1 + data.ansOpt2 + data.ansOpt3
       })
-  res.render('dashboard',{data:x, info:docs})
+  res.render('dashboard',{data:x, info:docs,message:"Logged in successfully"})
    })
    })
 })

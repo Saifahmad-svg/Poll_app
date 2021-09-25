@@ -87,12 +87,74 @@
          text-align: center;
          display: block;
     }
+    .popup {
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    /* The actual popup */
+    .popup .popuptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 35%;
+    margin-left: -80px;
+    }
+
+
+
+    /* Toggle this class - hide and show the popup */
+    .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 2s;
+    animation: fadeIn 2s;
+    }
+    .popup .hidden {
+    opacity:0;
+    -webkit-animation: fadeOut 2s;
+    animation: fadeOut 2s;
+    }
+    /* Add animation (fade in the popup) */
+    @-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+    }
+
+    @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+    }
+
+    @-webkit-keyframes fadeOut {
+    from {opacity: 1;} 
+    to {opacity: 0;}
+    }
+
+    @keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity:0 ;}
+    }
     </style>
     <script src="/app.js"></script>
 </head>
 <body>
     <div class="pageWrap">
     <div class="container">
+        <% if(message!="") {%>
+            <div class="popup" >
+                <span class="popuptext" id="myPopup"> <%= message %></span>
+                </div>
+                <% }%>
         <div class="card-login">
             <div class="bgimg">
 
@@ -116,5 +178,17 @@
 
 </div>
 </div>
+<script>
+    // When the user clicks on div, open the popup
+    function myFunction() {
+      var popup = document.getElementById("myPopup");
+      popup.classList.add("show");
+       setTimeout(function(){
+        popup.classList.add('hidden');
+      },5000)
+    }
+    
+    myFunction();
+    </script>
 </body>
 </html>
